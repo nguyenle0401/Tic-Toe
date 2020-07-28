@@ -1,26 +1,37 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { Component } from "react";
+import Board from "./components/Board";
+import "./App.css";
+export default class App extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      username: "Nguyen Le",
+      nextPlayer: true, //true is X, false is O
+      squareList: ["", "", "", "", "", "", "", "", ""],
+      winner: "",
+      history: [],
+    };
+  }
+  setParentsState = (obj) => {
+    this.setState(obj);
+  };
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+  render() {
+    return (
+      <div>
+        <h1> Tic Tac Toe</h1>
+        <h3>User name : {this.state.username} </h3>
+        <h1>Winner is:{this.state.winner} </h1>
+        <ol>History</ol>
+        <ol>Ranking</ol>
+        <Board
+          history={this.state.history}
+          squareList={this.state.squareList}
+          setParentsState={this.setParentsState}
+          nextPlayer={this.state.nextPlayer}
+          winner={this.state.winner}
+        />
+      </div>
+    );
+  }
 }
-
-export default App;
