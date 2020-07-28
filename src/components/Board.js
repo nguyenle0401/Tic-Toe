@@ -39,7 +39,7 @@ export default class Board extends Component {
     let history = this.props.history;
     console.log(...history);
     history = [...history, [!this.props.nextPlayer, array]];
-    array[id] = this.props.nextPlayer ? "X" : "O";
+    array[id] = this.props.nextPlayer ? "❌" : "🟢";
 
     this.props.setParentsState({
       history: history,
