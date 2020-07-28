@@ -21,14 +21,14 @@ export default class App extends Component {
       <div className = "style-all">
         <div className = "style-title">
         <h1> Tic Tac Toe</h1>
-        <h3>User name : {this.state.username} </h3>
-        <ol>History</ol>
-        <ol>Ranking</ol>
+        <h3 className = "style-user">User name : {this.state.username} </h3>
+        
         </div>
 
 
         <div>
-          <h3>Result: {this.state.winner} </h3>
+        <h3 className = "style-user">Result: {this.state.winner} </h3>
+        <h3>History</h3>
         <Board
           history={this.state.history}
           squareList={this.state.squareList}

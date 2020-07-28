@@ -74,7 +74,8 @@ export default class Board extends Component {
     return (
       <div>
         {this.props.history.map((item, index) => (
-          <button onClick={() => this.goBack(index)}>
+          <button
+          onClick={() => this.goBack(index)}>
             Go to move {index + 1}
           </button>
         ))}
