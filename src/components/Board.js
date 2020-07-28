@@ -34,11 +34,11 @@ export default class Board extends Component {
     if (this.props.squareList[id] !== "" || this.props.winner !== "") {
       return;
     }
-    let array = this.props.squareList;
+    let array = this.props.squareList.slice();
     console.log("sdsada", array);
     let history = this.props.history;
     console.log(...history);
-    history = [...history, array];
+    history = [...history, [!this.props.nextPlayer, array]];
     array[id] = this.props.nextPlayer ? "X" : "O";
 
     this.props.setParentsState({
