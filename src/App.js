@@ -18,12 +18,17 @@ export default class App extends Component {
 
   render() {
     return (
-      <div>
+      <div className = "style-all">
+        <div className = "style-title">
         <h1> Tic Tac Toe</h1>
         <h3>User name : {this.state.username} </h3>
-        <h1>Winner is:{this.state.winner} </h1>
         <ol>History</ol>
         <ol>Ranking</ol>
+        </div>
+
+
+        <div>
+          <h3>Result: {this.state.winner} </h3>
         <Board
           history={this.state.history}
           squareList={this.state.squareList}
@@ -31,6 +36,8 @@ export default class App extends Component {
           nextPlayer={this.state.nextPlayer}
           winner={this.state.winner}
         />
+        </div>
+        
       </div>
     );
   }

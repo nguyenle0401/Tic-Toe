@@ -20,45 +20,44 @@ export default class Board extends Component {
     }
     return null;
   };
-  goBack = (index) => {
-    // this.props.history = nguyen array cac list
-    let nextPlayer = this.props.history[index][0];
-    let squareList = this.props.history[index][1];
-    console.log(squareList);
-    this.props.setParentsState({
-      nextPlayer: nextPlayer,
-      squareList: squareList,
-    });
-  };
+//   goBack = (index) => {
+//     // this.props.history = nguyen array cac list
+//     let nextPlayer = this.props.history[index][0];
+//     let squareList = this.props.history[index][1];
+//     console.log(squareList);
+//     this.props.setParentsState({
+//       nextPlayer: nextPlayer,
+//       squareList: squareList,
+//     });
+//   };
   selectSq = (id) => {
     if (this.props.squareList[id] !== "" || this.props.winner !== "") {
       return;
     }
-    let array = this.props.squareList;
-    console.log("sdsada", array);
-    let history = this.props.history;
-    console.log(...history);
-    history = [...history, array];
-    array[id] = this.props.nextPlayer ? "X" : "O";
+    // let array = this.props.squareList.slice();
+    // history = [...history, [!this.props.nextPlayer, array]];
+    // console.log(...history);
+    // history = [...history, array];
+    // array[id] = this.props.nextPlayer ? "❌" : "🟢";
 
-    this.props.setParentsState({
-      history: history,
-    });
-    this.props.setParentsState({
-      squareList: array,
-      nextPlayer: !this.props.nextPlayer,
-    });
+    // this.props.setParentsState({
+    //   history: history,
+    // });
+    // this.props.setParentsState({
+    //   squareList: array,
+    //   nextPlayer: !this.props.nextPlayer,
+    // });
     const winner = this.whoisWinner(array);
     if (winner) {
       console.log(winner);
-      this.props.setParentsState({ winner: winner });
+      this.props.setParentsState({ winner: winner + " WIN" });
     } else if (array.every((square) => square !== "")) {
-      this.props.setParentsState({ winner: "hihi" });
+      this.props.setParentsState({ winner: "TIE" });
     }
   };
 
   render() {
-    //1. calculate winner, and when you have winner, show X is winner!
+    //1. calculate winner, and when you have winner, show ❌ is winner!
     //2. if there is no winner, show game over
     //3. if user try to click the square that already clicked, block it to change the value
     //4. make History
@@ -68,7 +67,7 @@ export default class Board extends Component {
     // if (winner) {
     //   status = 'Winner: ' + winner;
     // } else {
-    //   status = 'Next player: ' + (this.state.nextPlayer ? 'X' : 'O');
+    //   status = 'Next player: ' + (this.state.nextPlayer ? '❌' : '🟢');
     // }
 
     return (
@@ -80,9 +79,10 @@ export default class Board extends Component {
         ))}
 
         {console.log(this.props.history)}
-        <h3> Next Player : {this.props.nextPlayer ? "X" : "O"}</h3>
+        <h3> Next Player : {this.props.nextPlayer ? "❌" : "🟢"}</h3>
+        <div>
         <div style={{ display: "flex" }}>
-          <Square
+          <Square 
             id={0}
             selectSq={this.selectSq}
             value={this.props.squareList[0]}
@@ -131,6 +131,7 @@ export default class Board extends Component {
             selectSq={this.selectSq}
             value={this.props.squareList[8]}
           />
+        </div>
         </div>
       </div>
     );
