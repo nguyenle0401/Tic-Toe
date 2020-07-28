@@ -20,33 +20,34 @@ export default class Board extends Component {
     }
     return null;
   };
-//   goBack = (index) => {
-//     // this.props.history = nguyen array cac list
-//     let nextPlayer = this.props.history[index][0];
-//     let squareList = this.props.history[index][1];
-//     console.log(squareList);
-//     this.props.setParentsState({
-//       nextPlayer: nextPlayer,
-//       squareList: squareList,
-//     });
-//   };
+  goBack = (index) => {
+    // this.props.history = nguyen array cac list
+    let nextPlayer = this.props.history[index][0];
+    let squareList = this.props.history[index][1];
+    console.log(squareList);
+    this.props.setParentsState({
+      nextPlayer: nextPlayer,
+      squareList: squareList,
+    });
+  };
   selectSq = (id) => {
     if (this.props.squareList[id] !== "" || this.props.winner !== "") {
       return;
     }
-    // let array = this.props.squareList.slice();
-    // history = [...history, [!this.props.nextPlayer, array]];
-    // console.log(...history);
-    // history = [...history, array];
-    // array[id] = this.props.nextPlayer ? "❌" : "🟢";
+    let array = this.props.squareList.slice();
+    console.log("sdsada", array);
+    let history = this.props.history;
+    console.log(...history);
+    history = [...history, [!this.props.nextPlayer, array]];
+    array[id] = this.props.nextPlayer ? "X" : "O";
 
-    // this.props.setParentsState({
-    //   history: history,
-    // });
-    // this.props.setParentsState({
-    //   squareList: array,
-    //   nextPlayer: !this.props.nextPlayer,
-    // });
+    this.props.setParentsState({
+      history: history,
+    });
+    this.props.setParentsState({
+      squareList: array,
+      nextPlayer: !this.props.nextPlayer,
+    });
     const winner = this.whoisWinner(array);
     if (winner) {
       console.log(winner);
