@@ -21,7 +21,7 @@ export default class Board extends Component {
     return null;
   };
   goBack = (index) => {
-    // this.props.history = nguyen array cac list
+
     let nextPlayer = this.props.history[index][0];
     let squareList = this.props.history[index][1];
     console.log(squareList);
@@ -35,7 +35,7 @@ export default class Board extends Component {
       return;
     }
     let array = this.props.squareList.slice();
-    console.log("sdsada", array);
+    
     let history = this.props.history;
     console.log(...history);
     history = [...history, [!this.props.nextPlayer, array]];
@@ -48,32 +48,21 @@ export default class Board extends Component {
       squareList: array,
       nextPlayer: !this.props.nextPlayer,
     });
+
     const winner = this.whoisWinner(array);
     if (winner) {
       console.log(winner);
       this.props.setParentsState({ winner: winner + " WIN" });
     } else if (array.every((square) => square !== "")) {
-      this.props.setParentsState({ winner: "TIE" });
+      this.props.setParentsState({ winner: "GAME OVER" });
     }
   };
 
   render() {
-    //1. calculate winner, and when you have winner, show ❌ is winner!
-    //2. if there is no winner, show game over
-    //3. if user try to click the square that already clicked, block it to change the value
-    //4. make History
-
-    // const winner = this.whoisWinner(this.state.square);
-    // let status;
-    // if (winner) {
-    //   status = 'Winner: ' + winner;
-    // } else {
-    //   status = 'Next player: ' + (this.state.nextPlayer ? '❌' : '🟢');
-    // }
-
+  
     return (
       <div>
-        {/* {this.props.history.map((item, index) => (
+        {this.props.history.map((item, index) => (
           <button
           onClick={() => this.goBack(index)}>
             Go to move {index + 1}
@@ -81,7 +70,7 @@ export default class Board extends Component {
         ))}
 
         {console.log(this.props.history)}
-        <h3> Next Player : {this.props.nextPlayer ? "❌" : "🟢"}</h3> */}
+        <h3> Next Player : {this.props.nextPlayer ? "❌" : "🟢"}</h3>
         <div>
         <div style={{ display: "flex" }}>
           <Square 
@@ -139,3 +128,4 @@ export default class Board extends Component {
     );
   }
 }
+
