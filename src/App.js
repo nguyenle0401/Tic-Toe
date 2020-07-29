@@ -20,6 +20,7 @@ export default class App extends Component {
       history: [],
       ranking: [],
       loggedOn: false,
+      showRanking: false,
     };
   }
   setParentsState = (obj) => {
@@ -60,15 +61,16 @@ export default class App extends Component {
     this.setState({ userName: response.name });
     this.setState({ picture: response.picture.data.url });
     this.setState({ loggedOn: true });
+    this.setState({showRanking: true});
   };
 
   render() {
     return (
       <div className="style-all">
-        <div>
+        <div className = "style-logg">
           {this.state.loggedOn ? null : (
             <FacebookLogin
-              autoLoad={true}
+              autoLoad={false}
               appId="215525599776984"
               fields="name,picture"
               callback={this.responseFacebook}
@@ -84,23 +86,24 @@ export default class App extends Component {
           </h3>
           <div>
             <h3>Ranking:</h3>
-            {this.state.ranking.map((item) => (
+            {this.state.showRanking ? this.state.ranking.map((item) => (
               <div>
                 {item.player}:{item.score}
               </div>
-            ))}
+            )):null}
           </div>
         </div>
 
         <div>
           <h3 className="style-user">
-            Result:{" "}
+            {" "}
             {this.state.winner === "x" ? (
               <div>
-                <span>Winner:</span>
+                <span>🎉 🎉 🎉 Winner:</span>
+                <br/>
                 <img
                   src="https://cdn.discordapp.com/attachments/732068987206107267/737915014756696126/co_ba_la.png"
-                  width="30px"
+                  width="50px"
                 ></img>
               </div>
             ) : this.state.winner === "o" ? (
@@ -108,7 +111,7 @@ export default class App extends Component {
                 <span>Winner:</span>
                 <img
                   src="https://cdn.discordapp.com/attachments/732068987206107267/737921564724428840/con_bo.png"
-                  width="30px"
+                  width="50px"
                 ></img>
               </div>
             ) : (
@@ -118,6 +121,7 @@ export default class App extends Component {
           <h3>History</h3>
 
           <Board
+            loggedOn = {this.state.loggedOn}
             postData={this.postData}
             history={this.state.history}
             squareList={this.state.squareList}
