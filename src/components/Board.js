@@ -70,7 +70,7 @@ export default class Board extends Component {
         ))}
 
         {console.log(this.props.history)}
-        <h3> Next Player : {this.props.nextPlayer ? "❌" : "🟢"}</h3>
+        <h3> Next Player : {this.props.nextPlayer ? <img src="https://cdn.discordapp.com/attachments/732068987206107267/737915014756696126/co_ba_la.png" width="30px"></img> : <img src="https://cdn.discordapp.com/attachments/732068987206107267/737921564724428840/con_bo.png" width="30px"></img>}</h3>
         <div>
         <div style={{ display: "flex" }}>
           <Square 

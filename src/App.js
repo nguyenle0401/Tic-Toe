@@ -1,6 +1,12 @@
 import React, { Component } from "react";
 import Board from "./components/Board";
 import "./App.css";
+
+
+//1.score
+//2.time
+//3.post date
+//3.show classmate score
 export default class App extends Component {
   constructor(props) {
     super(props);
@@ -15,6 +21,26 @@ export default class App extends Component {
   setParentsState = (obj) => {
     this.setState(obj);
   };
+
+
+  postData = async() => {
+    let data = new URLSearchParams();
+data.append("player", "PLAYER_NAME");
+data.append("score", "TIME_ELAPSED_IN_SECONDS");
+const url = `http://ftw-highscores.herokuapp.com/tictactoe-dev`;
+const response = await fetch(url, {
+  method: "POST",
+  headers: {
+    "Content-Type": "application/x-www-form-urlencoded"
+  },
+  body: data.toString(),
+  json: true
+});
+
+  }
+  componentDidMount(){
+    this.postData()
+  }
 
   render() {
     return (
