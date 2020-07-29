@@ -73,7 +73,7 @@ export default class Board extends Component {
 
     return (
       <div>
-        {this.props.history.map((item, index) => (
+        {/* {this.props.history.map((item, index) => (
           <button
           onClick={() => this.goBack(index)}>
             Go to move {index + 1}
@@ -81,7 +81,7 @@ export default class Board extends Component {
         ))}
 
         {console.log(this.props.history)}
-        <h3> Next Player : {this.props.nextPlayer ? "❌" : "🟢"}</h3>
+        <h3> Next Player : {this.props.nextPlayer ? "❌" : "🟢"}</h3> */}
         <div>
         <div style={{ display: "flex" }}>
           <Square 
