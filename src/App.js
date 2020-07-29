@@ -53,7 +53,7 @@ const response = await fetch(url, {
 
 
         <div>
-        <h3 className = "style-user">Result: {this.state.winner} </h3>
+        <h3 className = "style-user">Result: {this.state.winner === "x"? <div><span>Winner:</span><img src="https://cdn.discordapp.com/attachments/732068987206107267/737915014756696126/co_ba_la.png" width="30px"></img></div>: this.state.winner === "o"? <div><span>Winner:</span><img src="https://cdn.discordapp.com/attachments/732068987206107267/737921564724428840/con_bo.png" width="30px" ></img></div> : this.state.winner} </h3>
         <h3>History</h3>
         <Board
           history={this.state.history}

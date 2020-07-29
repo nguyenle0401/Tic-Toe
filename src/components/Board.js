@@ -39,7 +39,7 @@ export default class Board extends Component {
     let history = this.props.history;
     console.log(...history);
     history = [...history, [!this.props.nextPlayer, array]];
-    array[id] = this.props.nextPlayer ? "❌" : "🟢";
+    array[id] = this.props.nextPlayer ? "x" : "o";
 
     this.props.setParentsState({
       history: history,
@@ -52,7 +52,7 @@ export default class Board extends Component {
     const winner = this.whoisWinner(array);
     if (winner) {
       console.log(winner);
-      this.props.setParentsState({ winner: winner + " WIN" });
+      this.props.setParentsState({ winner: winner});
     } else if (array.every((square) => square !== "")) {
       this.props.setParentsState({ winner: "GAME OVER" });
     }
