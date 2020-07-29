@@ -21,7 +21,6 @@ export default class Board extends Component {
     return null;
   };
   goBack = (index) => {
-
     let nextPlayer = this.props.history[index][0];
     let squareList = this.props.history[index][1];
     console.log(squareList);
@@ -35,7 +34,6 @@ export default class Board extends Component {
       return;
     }
     let array = this.props.squareList.slice();
-    
     let history = this.props.history;
     console.log(...history);
     history = [...history, [!this.props.nextPlayer, array]];
@@ -50,6 +48,12 @@ export default class Board extends Component {
     });
 
     const winner = this.whoisWinner(array);
+
+    if(winner !== null){
+        this.props.postData()
+      }
+
+
     if (winner) {
       console.log(winner);
       this.props.setParentsState({ winner: winner});
@@ -57,6 +61,7 @@ export default class Board extends Component {
       this.props.setParentsState({ winner: "GAME OVER" });
     }
   };
+
 
   render() {
   
