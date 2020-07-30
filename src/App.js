@@ -37,7 +37,7 @@ export default class App extends Component {
     data.append("player", this.state.userName);
     data.append("score", this.state.duration);
     const url = `http://ftw-highscores.herokuapp.com/tictactoe-dev`;
-    const response = await fetch(url, {
+    await fetch(url, {
       method: "POST",
       headers: {
         "Content-Type": "application/x-www-form-urlencoded",
@@ -87,7 +87,7 @@ export default class App extends Component {
           <h1> Tic Tac Toe</h1>
           <h3 className="style-user">User name : {this.state.userName} </h3>
           <h3>
-            <img src={this.state.picture} width="100px"></img>
+            <img src={this.state.picture} width="100px" alt="img"></img>
           </h3>
           <div>
             <h3>Ranking:</h3>
@@ -106,19 +106,21 @@ export default class App extends Component {
             {" "}
             {this.state.winner === "x" ? (
               <div>
-                <span>🎉 🎉 🎉 Winner:</span>
+                <span>Winner:</span>
                 <br />
                 <img
                   src="https://cdn.discordapp.com/attachments/732068987206107267/737915014756696126/co_ba_la.png"
                   width="50px"
+                  alt="img"
                 ></img>
               </div>
             ) : this.state.winner === "o" ? (
               <div>
-                <span>🎉 🎉 🎉 Winner</span>
+                <span>Winner</span>
                 <img
                   src="https://cdn.discordapp.com/attachments/732068987206107267/737921564724428840/con_bo.png"
                   width="50px"
+                  alt="img"
                 ></img>
               </div>
             ) : (

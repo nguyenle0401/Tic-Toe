@@ -16,7 +16,7 @@ export default class Board extends Component {
     for (let i = 0; i < winner.length; i++) {
       const [a, b, c] = winner[i];
       if (square[a] && square[a] === square[b] && square[a] === square[c])
-        return "Winner is", square[a];
+        return `Winner is ${square[a]}`;
     }
     return null;
   };
@@ -84,11 +84,13 @@ export default class Board extends Component {
             <img
               src="https://cdn.discordapp.com/attachments/732068987206107267/737915014756696126/co_ba_la.png"
               width="30px"
+              alt="img"
             ></img>
           ) : (
             <img
               src="https://cdn.discordapp.com/attachments/732068987206107267/737921564724428840/con_bo.png"
               width="30px"
+              alt="img"
             ></img>
           )}
         </h3>
