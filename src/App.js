@@ -50,7 +50,7 @@ export default class App extends Component {
   };
 
   getData = async () => {
-    let url = `http://ftw-highscores.herokuapp.com/tictactoe-dev`;
+    let url = `https://ftw-highscores.herokuapp.com/tictactoe-dev`;
     let data = await fetch(url);
     let result = await data.json();
     console.log("Result", result);
