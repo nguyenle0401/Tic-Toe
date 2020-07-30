@@ -1,6 +1,8 @@
 import React, { Component } from "react";
 import Square from "./Square";
 
+
+let startTime = null;
 export default class Board extends Component {
   whoisWinner = (square) => {
     const winner = [
@@ -30,6 +32,8 @@ export default class Board extends Component {
     });
   };
   selectSq = (id) => {
+
+    
     if (this.props.squareList[id] !== "" || this.props.winner !== "") {
       return;
     }
@@ -48,6 +52,11 @@ export default class Board extends Component {
     });
 
     const winner = this.whoisWinner(array);
+
+if(winner !== null){
+  let score = (Date.now() - startTime)/1000
+}
+
 
     if(winner !== null){
         this.props.postData()

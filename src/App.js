@@ -27,10 +27,10 @@ export default class App extends Component {
     this.setState(obj);
   };
 
-  postData = async () => {
+  postData = async (score) => {
     let data = new URLSearchParams();
     data.append("player", "nguyenle");
-    data.append("score", -11000);
+    data.append("score", score);
     const url = `http://ftw-highscores.herokuapp.com/tictactoe-dev`;
     const response = await fetch(url, {
       method: "POST",
@@ -108,7 +108,7 @@ export default class App extends Component {
               </div>
             ) : this.state.winner === "o" ? (
               <div>
-                <span>Winner:</span>
+                <span>🎉 🎉 🎉 Winner</span>
                 <img
                   src="https://cdn.discordapp.com/attachments/732068987206107267/737921564724428840/con_bo.png"
                   width="50px"
