@@ -21,16 +21,21 @@ export default class App extends Component {
       ranking: [],
       loggedOn: false,
       showRanking: false,
+      isFirst: true,
+      startTime: 0,
+      duration: 0,
     };
+    console.log(this.state);
   }
   setParentsState = (obj) => {
     this.setState(obj);
   };
 
-  postData = async (score) => {
+  postData = async () => {
     let data = new URLSearchParams();
-    data.append("player", "nguyenle");
-    data.append("score", score);
+
+    data.append("player", this.state.userName);
+    data.append("score", this.state.duration);
     const url = `http://ftw-highscores.herokuapp.com/tictactoe-dev`;
     const response = await fetch(url, {
       method: "POST",
@@ -40,7 +45,7 @@ export default class App extends Component {
       body: data.toString(),
       json: true,
     });
-
+    console.log("ggg", data.toString());
     this.getData();
   };
 
@@ -61,13 +66,13 @@ export default class App extends Component {
     this.setState({ userName: response.name });
     this.setState({ picture: response.picture.data.url });
     this.setState({ loggedOn: true });
-    this.setState({showRanking: true});
+    this.setState({ showRanking: true });
   };
 
   render() {
     return (
       <div className="style-all">
-        <div className = "style-logg">
+        <div className="style-logg">
           {this.state.loggedOn ? null : (
             <FacebookLogin
               autoLoad={false}
@@ -86,11 +91,13 @@ export default class App extends Component {
           </h3>
           <div>
             <h3>Ranking:</h3>
-            {this.state.showRanking ? this.state.ranking.map((item) => (
-              <div>
-                {item.player}:{item.score}
-              </div>
-            )):null}
+            {this.state.showRanking
+              ? this.state.ranking.map((item) => (
+                  <div>
+                    {item.player}:{item.score}
+                  </div>
+                ))
+              : null}
           </div>
         </div>
 
@@ -100,7 +107,7 @@ export default class App extends Component {
             {this.state.winner === "x" ? (
               <div>
                 <span>🎉 🎉 🎉 Winner:</span>
-                <br/>
+                <br />
                 <img
                   src="https://cdn.discordapp.com/attachments/732068987206107267/737915014756696126/co_ba_la.png"
                   width="50px"
@@ -121,13 +128,16 @@ export default class App extends Component {
           <h3>History</h3>
 
           <Board
-            loggedOn = {this.state.loggedOn}
+            loggedOn={this.state.loggedOn}
+            isFirst={this.state.isFirst}
             postData={this.postData}
             history={this.state.history}
             squareList={this.state.squareList}
             setParentsState={this.setParentsState}
             nextPlayer={this.state.nextPlayer}
             winner={this.state.winner}
+            startTime={this.state.startTime}
+            duration={this.state.duration}
           />
         </div>
       </div>

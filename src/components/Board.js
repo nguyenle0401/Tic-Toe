@@ -1,8 +1,6 @@
 import React, { Component } from "react";
 import Square from "./Square";
 
-
-let startTime = null;
 export default class Board extends Component {
   whoisWinner = (square) => {
     const winner = [
@@ -31,9 +29,12 @@ export default class Board extends Component {
       squareList: squareList,
     });
   };
-  selectSq = (id) => {
+  selectSq = async (id) => {
+    if (this.props.isFirst) {
+      let temp = Date.now();
+      this.props.setParentsState({ isFirst: false, startTime: temp });
+    }
 
-    
     if (this.props.squareList[id] !== "" || this.props.winner !== "") {
       return;
     }
@@ -53,102 +54,107 @@ export default class Board extends Component {
 
     const winner = this.whoisWinner(array);
 
-if(winner !== null){
-  let score = (Date.now() - startTime)/1000
-}
-
-
-    if(winner !== null){
-        this.props.postData()
-      }
-
-
     if (winner) {
       console.log(winner);
-      this.props.setParentsState({ winner: winner});
+      let tempEnd = (Date.now() - this.props.startTime) / 1000;
+      await this.props.setParentsState({ winner: winner, duration: tempEnd });
+      this.props.postData();
     } else if (array.every((square) => square !== "")) {
-      this.props.setParentsState({ winner: "GAME OVER 😢" });
+      let tempEnd = (Date.now() - this.props.startTime) / 1000;
+      this.props.setParentsState({ winner: "GAME OVER 😢", duration: tempEnd });
+    }
+    if (winner !== null) {
     }
   };
 
-
   render() {
-  
     return (
       <div>
         {this.props.history.map((item, index) => (
-          <button
-          onClick={() => this.goBack(index)}>
+          <button onClick={() => this.goBack(index)}>
             Go to move {index + 1}
           </button>
         ))}
 
         {console.log(this.props.history)}
-        <h3> Next Player :<br/> {this.props.nextPlayer ? <img src="https://cdn.discordapp.com/attachments/732068987206107267/737915014756696126/co_ba_la.png" width="30px"></img> : <img src="https://cdn.discordapp.com/attachments/732068987206107267/737921564724428840/con_bo.png" width="30px"></img>}</h3>
+        <h3>
+          {" "}
+          Next Player :<br />{" "}
+          {this.props.nextPlayer ? (
+            <img
+              src="https://cdn.discordapp.com/attachments/732068987206107267/737915014756696126/co_ba_la.png"
+              width="30px"
+            ></img>
+          ) : (
+            <img
+              src="https://cdn.discordapp.com/attachments/732068987206107267/737921564724428840/con_bo.png"
+              width="30px"
+            ></img>
+          )}
+        </h3>
         <div>
-        <div style={{ display: "flex" }}>
-          <Square 
-            loggedOn = {this.props.loggedOn}
-            id={0}
-            selectSq={this.selectSq}
-            value={this.props.squareList[0]}
-          />
-          <Square
-          loggedOn = {this.props.loggedOn}
-            id={1}
-            selectSq={this.selectSq}
-            value={this.props.squareList[1]}
-          />
-          <Square
-          loggedOn = {this.props.loggedOn}
-            id={2}
-            selectSq={this.selectSq}
-            value={this.props.squareList[2]}
-          />
-        </div>
-        <div style={{ display: "flex" }}>
-          <Square
-          loggedOn = {this.props.loggedOn}
-            id={3}
-            selectSq={this.selectSq}
-            value={this.props.squareList[3]}
-          />
-          <Square
-          loggedOn = {this.props.loggedOn}
-            id={4}
-            selectSq={this.selectSq}
-            value={this.props.squareList[4]}
-          />
-          <Square
-          loggedOn = {this.props.loggedOn}
-            id={5}
-            selectSq={this.selectSq}
-            value={this.props.squareList[5]}
-          />
-        </div>
-        <div style={{ display: "flex" }}>
-          <Square
-          loggedOn = {this.props.loggedOn}
-            id={6}
-            selectSq={this.selectSq}
-            value={this.props.squareList[6]}
-          />
-          <Square
-          loggedOn = {this.props.loggedOn}
-            id={7}
-            selectSq={this.selectSq}
-            value={this.props.squareList[7]}
-          />
-          <Square
-          loggedOn = {this.props.loggedOn}
-            id={8}
-            selectSq={this.selectSq}
-            value={this.props.squareList[8]}
-          />
-        </div>
+          <div style={{ display: "flex" }}>
+            <Square
+              loggedOn={this.props.loggedOn}
+              id={0}
+              selectSq={this.selectSq}
+              value={this.props.squareList[0]}
+            />
+            <Square
+              loggedOn={this.props.loggedOn}
+              id={1}
+              selectSq={this.selectSq}
+              value={this.props.squareList[1]}
+            />
+            <Square
+              loggedOn={this.props.loggedOn}
+              id={2}
+              selectSq={this.selectSq}
+              value={this.props.squareList[2]}
+            />
+          </div>
+          <div style={{ display: "flex" }}>
+            <Square
+              loggedOn={this.props.loggedOn}
+              id={3}
+              selectSq={this.selectSq}
+              value={this.props.squareList[3]}
+            />
+            <Square
+              loggedOn={this.props.loggedOn}
+              id={4}
+              selectSq={this.selectSq}
+              value={this.props.squareList[4]}
+            />
+            <Square
+              loggedOn={this.props.loggedOn}
+              id={5}
+              selectSq={this.selectSq}
+              value={this.props.squareList[5]}
+            />
+          </div>
+          <div style={{ display: "flex" }}>
+            <Square
+              loggedOn={this.props.loggedOn}
+              id={6}
+              selectSq={this.selectSq}
+              value={this.props.squareList[6]}
+            />
+            <Square
+              loggedOn={this.props.loggedOn}
+              id={7}
+              selectSq={this.selectSq}
+              value={this.props.squareList[7]}
+            />
+            <Square
+              loggedOn={this.props.loggedOn}
+              id={8}
+              selectSq={this.selectSq}
+              value={this.props.squareList[8]}
+            />
+          </div>
         </div>
       </div>
     );
   }
 }
-
